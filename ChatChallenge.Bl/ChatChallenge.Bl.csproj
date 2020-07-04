@@ -4,4 +4,13 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ChatChallenge.Core\ChatChallenge.Core.csproj" />
+    <ProjectReference Include="..\ChatChallenge.Model\ChatChallenge.Model.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatChallenge", "ChatChallenge\ChatChallenge.csproj", "{7ADC69DF-FC06-4CAB-875E-7DAFBE85E5E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatChallenge", "ChatChallenge\ChatChallenge.csproj", "{7ADC69DF-FC06-4CAB-875E-7DAFBE85E5E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatChallenge.Model", "ChatChallenge.Model\ChatChallenge.Model.csproj", "{D539C0E3-E221-44E5-B470-7CBDDB2B643A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatChallenge.Model", "ChatChallenge.Model\ChatChallenge.Model.csproj", "{D539C0E3-E221-44E5-B470-7CBDDB2B643A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatChallenge.Bl", "ChatChallenge.Bl\ChatChallenge.Bl.csproj", "{3924EC10-6D67-441E-82C6-708494D1733C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatChallenge.Bl", "ChatChallenge.Bl\ChatChallenge.Bl.csproj", "{3924EC10-6D67-441E-82C6-708494D1733C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatChallenge.Core", "ChatChallenge.Core\ChatChallenge.Core.csproj", "{0279B1E6-9A01-49CC-9914-A63A2F64B85D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatChallenge.Core", "ChatChallenge.Core\ChatChallenge.Core.csproj", "{0279B1E6-9A01-49CC-9914-A63A2F64B85D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatChallenge.Services", "ChatChallenge.Services\ChatChallenge.Services.csproj", "{42D3F89A-1F6A-4CEF-97D2-D51B782F7C95}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{0279B1E6-9A01-49CC-9914-A63A2F64B85D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0279B1E6-9A01-49CC-9914-A63A2F64B85D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0279B1E6-9A01-49CC-9914-A63A2F64B85D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42D3F89A-1F6A-4CEF-97D2-D51B782F7C95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42D3F89A-1F6A-4CEF-97D2-D51B782F7C95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42D3F89A-1F6A-4CEF-97D2-D51B782F7C95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42D3F89A-1F6A-4CEF-97D2-D51B782F7C95}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

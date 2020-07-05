@@ -2,12 +2,13 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace ChatChallenge.Model.Contexts.ChatChallenge
 {
-    public interface IChatChallengeDbContext
+    public interface IChatChallengeDbContext : IDisposable
     {
         DatabaseFacade Database { get; }
         DbSet<T> GetDbSet<T>() where T : class, IBaseEntity;

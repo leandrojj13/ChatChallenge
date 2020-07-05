@@ -14,6 +14,9 @@ using Swashbuckle.AspNetCore.Swagger;
 using System;
 using AutoMapper;
 using ChatChallenge.Services.IoC;
+using ChatChallenge.Filters;
+using FluentValidation.AspNetCore;
+using ChatChallenge.Bl.Validators;
 
 namespace ChatChallenge
 {
@@ -72,12 +75,14 @@ namespace ChatChallenge
             #endregion
 
             #region Global Api Config
-            services.AddMvc()
+            services.AddMvc(o => { o.Filters.Add<ValidationHttpParametersFilter>();})
                .AddJsonOptions(options => {
                    options.SerializerSettings.ContractResolver =
                        new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver();
                })
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<ChatRoomValidator>());
+
 
             Dependency.ServiceProvider = services.BuildServiceProvider();
             #endregion

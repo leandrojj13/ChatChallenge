@@ -2,6 +2,7 @@
 using ChatChallenge.Core.BaseModel.BaseEntity;
 using ChatChallenge.Core.BaseModelDto.BaseEntityDto;
 using ChatChallenge.Services.Generic;
+using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -13,20 +14,28 @@ using System.Threading.Tasks;
 
 namespace ChatChallenge.Controllers
 {
+    public interface IBaseController
+    {
+        IValidatorFactory _validationFactory { get; set; }
+        UnprocessableEntityObjectResult UnprocessableEntity(object error);
+    }
+
+
     [Produces("application/json")]
     [Route("api/[controller]")]
-    public class BaseController<TEntity, TEntityDto>  : ControllerBase
+    public class BaseController<TEntity, TEntityDto>  : ControllerBase, IBaseController
             where TEntity : class, IBaseEntity
             where TEntityDto : class, IBaseEntityDto
     {
+        public IValidatorFactory _validationFactory { get; set; }
         protected readonly IEntityCRUDService<TEntity, TEntityDto> _entityCRUDService;
 
-        public BaseController(IEntityCRUDService<TEntity, TEntityDto> entityCRUDService)
+        public BaseController(IEntityCRUDService<TEntity, TEntityDto> entityCRUDService, IValidatorFactory validationFactory)
         {
             _entityCRUDService = entityCRUDService;
+            _validationFactory = validationFactory;
         }
 
-  
         /// <summary>
         /// Get all by query options.
         /// </summary>

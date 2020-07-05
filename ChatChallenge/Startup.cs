@@ -19,6 +19,12 @@ using FluentValidation.AspNetCore;
 using ChatChallenge.Bl.Validators;
 using ChatChallenge.Config;
 using ChatChallenge.Core.Models;
+using ChatChallenge.Model.Entities.Security;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using ChatChallenge.Mock;
 
 namespace ChatChallenge
 {
@@ -69,6 +75,34 @@ namespace ChatChallenge
             #region Adding Settings Sections
             services.Configure<ConnectionStrings>(Configuration.GetSection("ConnectionStrings"));
             services.Configure<SerilogSettings>(Configuration.GetSection("SerilogSettings"));
+            services.Configure<TokenSetting>(Configuration.GetSection("TokenSetting"));
+            #endregion
+
+            #region Auth config
+
+            services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<ChatChallengeDbContext>().AddDefaultTokenProviders();
+
+            var tokenSetting = Configuration.GetSection("TokenSetting").Get<TokenSetting>();
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(tokenSetting.Secret)),
+                    ValidIssuer = tokenSetting.Issuer,
+                    ValidAudience = tokenSetting.Audience,
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+            services.AddAuthorization();
             #endregion
 
             #region Adding External Libs
@@ -95,7 +129,7 @@ namespace ChatChallenge
 
             Dependency.ServiceProvider = services.BuildServiceProvider();
             #endregion
-        
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -117,9 +151,11 @@ namespace ChatChallenge
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
 
+            app.UseAuthentication();
             app.UseHttpsRedirection();
 
             app.UseCors("AllowAllPolicy");
+            app.CreateFakeUsers();
 
             app.UseMvc();
         }

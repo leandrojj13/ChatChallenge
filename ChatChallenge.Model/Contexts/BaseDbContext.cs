@@ -4,12 +4,15 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using ChatChallenge.Core.BaseModel.BaseEntity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using ChatChallenge.Model.Entities.Security;
 
 namespace ChatChallenge.Model.Contexts
 {
-    public abstract class BaseDbContext : DbContext
+    public abstract class BaseDbContext : IdentityDbContext<User>
     {
         private readonly string _userEmail;
+
         public BaseDbContext(DbContextOptions options
             ) : base(options)
         {

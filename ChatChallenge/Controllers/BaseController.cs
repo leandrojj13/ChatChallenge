@@ -3,6 +3,7 @@ using ChatChallenge.Core.BaseModel.BaseEntity;
 using ChatChallenge.Core.BaseModelDto.BaseEntityDto;
 using ChatChallenge.Services.Generic;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -21,6 +22,7 @@ namespace ChatChallenge.Controllers
     }
 
 
+    [Authorize]
     [Produces("application/json")]
     [Route("api/[controller]")]
     public class BaseController<TEntity, TEntityDto>  : ControllerBase, IBaseController
@@ -90,7 +92,6 @@ namespace ChatChallenge.Controllers
 
             return Ok(entityDto);
         }
-
 
         /// <summary>
         /// Deletes a specific record by id.

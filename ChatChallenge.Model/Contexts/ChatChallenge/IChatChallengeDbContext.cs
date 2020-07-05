@@ -11,7 +11,7 @@ namespace ChatChallenge.Model.Contexts.ChatChallenge
     public interface IChatChallengeDbContext : IDisposable
     {
         DatabaseFacade Database { get; }
-        DbSet<T> GetDbSet<T>() where T : class, IBaseEntity;
+        DbSet<T> GetDbSet<T>() where T : class;
         int SaveChanges();
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
         EntityEntry<T> Entry<T>(T entity) where T : class;

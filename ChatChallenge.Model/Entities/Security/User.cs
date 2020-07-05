@@ -1,12 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ChatChallenge.Core.BaseModel.BaseEntity;
+﻿using System.Collections.Generic;
+using ChatChallenge.Model.Entities.Chat;
+using Microsoft.AspNetCore.Identity;
 
 namespace ChatChallenge.Model.Entities.Security
 {
-    public class User : BaseEntity
+    public class User : IdentityUser
     {
-        public string UserName { get; set; }
+        public User()
+        {
+            ChatRoomMessages = new HashSet<ChatRoomMessage>();
+        }
+
+        public string FullName { get; set; }
+
+        public virtual ICollection<ChatRoomMessage> ChatRoomMessages { get; set; }
     }
 }

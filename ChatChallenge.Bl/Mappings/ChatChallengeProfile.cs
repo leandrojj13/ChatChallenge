@@ -11,7 +11,8 @@ namespace ChatChallenge.Bl.Mappings
     {
         public ChatChallengeProfile()
         {
-            this._CreateMap_WithConventions_FromAssemblies<User, UserDto>();
+            CreateMap<User, UserDto>();
+
             this._CreateMap_WithConventions_FromAssemblies<ChatRoom, ChatRoomDto>();
         }
     }

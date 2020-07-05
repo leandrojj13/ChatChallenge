@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using ChatChallenge.Bl.IoC;
+using ChatChallenge.Core.IoC;
+using ChatChallenge.Core.IoC.Config;
+using ChatChallenge.IoC;
+using ChatChallenge.Model.IoC;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace ChatChallenge
 {
@@ -26,6 +24,14 @@ namespace ChatChallenge
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            #region IoC Registry
+            services.AddCoreRegistry();
+            services.AddModelRegistry();
+            services.AddBlRegistry();
+            services.AddMainRegistry();
+            Dependency.ServiceProvider = services.BuildServiceProvider();
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

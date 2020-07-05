@@ -17,6 +17,8 @@ using ChatChallenge.Services.IoC;
 using ChatChallenge.Filters;
 using FluentValidation.AspNetCore;
 using ChatChallenge.Bl.Validators;
+using ChatChallenge.Config;
+using ChatChallenge.Core.Models;
 
 namespace ChatChallenge
 {
@@ -64,7 +66,14 @@ namespace ChatChallenge
             services.AddDbContext<ChatChallengeDbContext>(op => op.UseSqlServer(myAppDbContextConnection), ServiceLifetime.Transient);
             #endregion
 
+            #region Adding Settings Sections
+            services.Configure<ConnectionStrings>(Configuration.GetSection("ConnectionStrings"));
+            services.Configure<SerilogSettings>(Configuration.GetSection("SerilogSettings"));
+            #endregion
+
             #region Adding External Libs
+            //Register Serilog from extension
+            services.AddSerilog(Configuration);
             //Register AutoMapper
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             // Register the Swagger generator, defining 1 or more Swagger documents

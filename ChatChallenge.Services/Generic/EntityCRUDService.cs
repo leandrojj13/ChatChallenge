@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace ChatChallenge.Services.Generic
 {
-    public class EntityCRUDService<TEntity, TEntityDto> where TEntity : class, IBaseEntity
+    public class EntityCRUDService<TEntity, TEntityDto> : IEntityCRUDService<TEntity, TEntityDto> where TEntity : class, IBaseEntity
         where TEntityDto : class, IBaseEntityDto
     {
 

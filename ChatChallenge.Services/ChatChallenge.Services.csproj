@@ -8,8 +8,4 @@
     <ProjectReference Include="..\ChatChallenge.Bl\ChatChallenge.Bl.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-
 </Project>

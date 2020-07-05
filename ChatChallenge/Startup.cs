@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
 using AutoMapper;
+using ChatChallenge.Services.IoC;
 
 namespace ChatChallenge
 {
@@ -51,6 +52,7 @@ namespace ChatChallenge
             services.AddCoreRegistry();
             services.AddModelRegistry();
             services.AddBlRegistry();
+            services.AddServicesRegistry();
             services.AddMainRegistry();
             #endregion
 

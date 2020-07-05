@@ -1,4 +1,5 @@
 ﻿using ChatChallenge.Core.BaseModel.BaseEntity;
+using ChatChallenge.Model.Entities.Chat;
 using ChatChallenge.Model.Entities.Security;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -14,6 +15,7 @@ namespace ChatChallenge.Model.Contexts.ChatChallenge
         }
 
         #region DbSets
+        public DbSet<ChatRoom> ChatRooms { get; set; }
         public DbSet<User> Users { get; set; }
 
         #endregion

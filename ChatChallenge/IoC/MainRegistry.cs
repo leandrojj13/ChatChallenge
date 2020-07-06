@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using ChatChallenge.Hubs;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ChatChallenge.IoC
 {

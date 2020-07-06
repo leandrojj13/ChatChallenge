@@ -26,6 +26,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using ChatChallenge.Mock;
 using ChatChallenge.Hubs;
+using NServiceBus;
 
 namespace ChatChallenge
 {
@@ -107,6 +108,8 @@ namespace ChatChallenge
             #endregion
 
             #region Adding External Libs
+            //Register NServiceBus
+            services.AddNServiceBus(Configuration);
             //Register SignalR
             services.AddSignalR();
             //Register Serilog from extension
@@ -131,6 +134,7 @@ namespace ChatChallenge
 
 
             Dependency.ServiceProvider = services.BuildServiceProvider();
+
             #endregion
 
         }
@@ -159,11 +163,18 @@ namespace ChatChallenge
 
             app.UseCors("AllowAllPolicy");
             app.CreateFakeUsers();
+
+            app.ApplicationServices.GetService(typeof(IMessageSession));
             app.UseSignalR(routes =>
             {
                 routes.MapHub<ChatRoomHub>("/ChatRoomHub");
             });
+            
+
             app.UseMvc();
+
+
         }
     }
 }
+

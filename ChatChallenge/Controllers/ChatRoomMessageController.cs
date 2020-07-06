@@ -1,9 +1,11 @@
 ﻿using ChatChallenge.Bl.Dto.Chat;
+using ChatChallenge.Messages.Commands;
 using ChatChallenge.Model.Entities.Chat;
 using ChatChallenge.Services.Services.Chat;
 using ChatChallenge.Services.Services.Stock;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using NServiceBus;
 using System.Threading.Tasks;
 
 namespace ChatChallenge.Controllers
@@ -12,12 +14,13 @@ namespace ChatChallenge.Controllers
     public class ChatRoomMessageController : BaseController<ChatRoomMessage, ChatRoomMessageDto>
     {
         protected readonly IChatRoomMessageService _chatRoomMessageService;
-        private readonly IStookService _stookService;
+        private readonly IMessageSession  _messageSession;
+        
 
-        public ChatRoomMessageController(IChatRoomMessageService chatRoomMessageService, IValidatorFactory validationFactory, IStookService stookService) : base(chatRoomMessageService, validationFactory)
+        public ChatRoomMessageController(IChatRoomMessageService chatRoomMessageService, IValidatorFactory validationFactory, IMessageSession messageSession) : base(chatRoomMessageService, validationFactory)
         {
             _chatRoomMessageService = chatRoomMessageService;
-            _stookService = stookService;
+            _messageSession = messageSession;
         }
 
         /// <summary>
@@ -37,8 +40,8 @@ namespace ChatChallenge.Controllers
         [HttpPost("StockInfo")]
         public virtual async Task<IActionResult> StockInfo([FromBody] ChatRoomMessageDto entityDto)
         {
-            var response = await _stookService.GetStockInfoByCodeAsync(entityDto.Message);
-            return Ok(response);
+            await _messageSession.Send(new RequestStockInfo() { Code = entityDto.Message, ChatRoomId = entityDto.ChatRoomId.ToString() });
+            return Ok();
         }
     }
 }

@@ -10,6 +10,9 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.1.0" />
+    <PackageReference Include="NServiceBus" Version="7.3.0" />
+    <PackageReference Include="NServiceBus.Persistence.Sql" Version="4.6.0" />
+    <PackageReference Include="NServiceBus.SqlServer" Version="4.3.0" />
     <PackageReference Include="Serilog.AspNetCore" Version="2.1.1" />
     <PackageReference Include="Serilog.Sinks.ColoredConsole" Version="3.0.1" />
     <PackageReference Include="Serilog.Sinks.MSSqlServer" Version="5.1.3" />
@@ -20,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ChatChallenge.Bl\ChatChallenge.Bl.csproj" />
+    <ProjectReference Include="..\ChatChallenge.Messages\ChatChallenge.Messages.csproj" />
     <ProjectReference Include="..\ChatChallenge.Services\ChatChallenge.Services.csproj" />
   </ItemGroup>
 

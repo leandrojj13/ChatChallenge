@@ -12,12 +12,12 @@ using System.Threading.Tasks;
 
 namespace ChatChallenge.Services.Services.Stock
 {
-    public interface IStookService
+    public interface IStockService
     {
         Task<StookRequestReponse> GetStockInfoByCodeAsync(string code);
     }
 
-    public class StookService : IStookService
+    public class StockService : IStockService
     {
         public string ServiceUrl = "https://stooq.com/q/l/?s={{stock_code}}&f=sd2t2ohlcv&h&e=csv";
         

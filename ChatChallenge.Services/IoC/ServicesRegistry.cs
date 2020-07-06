@@ -16,7 +16,7 @@ namespace ChatChallenge.Services.IoC
             services.AddTransient<IChatRoomMessageService, ChatRoomMessageService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IAuthService, AuthService>();
-            services.AddTransient<IStookService, StookService>();
+            services.AddTransient<IStockService, StockService>();
         }
     }
 }

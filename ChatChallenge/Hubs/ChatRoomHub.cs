@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using ChatChallenge.Messages.Events;
 using Microsoft.AspNetCore.SignalR;
 
 namespace ChatChallenge.Hubs

@@ -9,7 +9,7 @@ namespace ChatChallenge.Model.Entities.Chat
     public class ChatRoomMessage : BaseEntity
     {
         public int ChatRoomId { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public string Message { get; set; }
 
         public virtual ChatRoom ChatRoom { get; set; }

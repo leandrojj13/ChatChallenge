@@ -25,6 +25,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using ChatChallenge.Mock;
+using ChatChallenge.Hubs;
 
 namespace ChatChallenge
 {
@@ -106,6 +107,8 @@ namespace ChatChallenge
             #endregion
 
             #region Adding External Libs
+            //Register SignalR
+            services.AddSignalR();
             //Register Serilog from extension
             services.AddSerilog(Configuration);
             //Register AutoMapper
@@ -156,7 +159,10 @@ namespace ChatChallenge
 
             app.UseCors("AllowAllPolicy");
             app.CreateFakeUsers();
-
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<ChatRoomHub>("/ChatRoomHub");
+            });
             app.UseMvc();
         }
     }

@@ -3,7 +3,7 @@
 This is an API with the fundamentals things that need a Chat Room, It allows you to create users, send a broadcast message to the user's chat room, and allows consulting a stock service through a Bot. 
 
 ## Installation
-First, you need is configure your Database Settings. Go to the file named appsettings.json in the main project (ChatChallenge).
+First, you need to configure your Database Settings. Go to the file named appsettings.json in the main project (ChatChallenge).
 
 ```bash
  "ConnectionStrings": {
@@ -25,7 +25,7 @@ Run the migration.
 ```bash
 Update-Database
 ```
-Second, you need is configure your Database Settings but now in the project named ChatChallenge.Bus. Go to the file named appsettings.json and change it.
+Second, you need to configure your Database Settings but now in the project named ChatChallenge.Bus. Go to the file named appsettings.json and change it.
 
 ```bash
  "NServiceBusConfig": {

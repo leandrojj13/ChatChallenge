@@ -27,6 +27,7 @@ using System.Text;
 using ChatChallenge.Mock;
 using ChatChallenge.Hubs;
 using NServiceBus;
+using Microsoft.AspNetCore.SignalR;
 
 namespace ChatChallenge
 {
@@ -44,19 +45,18 @@ namespace ChatChallenge
         {
 
             #region CORS
+            var appSettings = Configuration.GetSection("AppSettings").Get<AppSettings>();
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAllPolicy",
                       builder =>
                       {
                           builder
-                                 .WithOrigins("http://localhost:8080")
+                                 .WithOrigins(appSettings.ClientUrls)
                                  .AllowAnyHeader()
                                  .AllowAnyMethod()
-                                 .AllowCredentials()
-                                 ;
+                                 .AllowCredentials();
                           builder.SetIsOriginAllowed(x => true);
-
                       });
             });
             #endregion
@@ -67,6 +67,7 @@ namespace ChatChallenge
             services.AddBlRegistry();
             services.AddServicesRegistry();
             services.AddMainRegistry();
+            services.AddSingleton(appSettings);
             #endregion
 
             #region ContextConfiguration
@@ -76,6 +77,7 @@ namespace ChatChallenge
 
             #region Adding Settings Sections
             services.Configure<ConnectionStrings>(Configuration.GetSection("ConnectionStrings"));
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
             services.Configure<SerilogSettings>(Configuration.GetSection("SerilogSettings"));
             services.Configure<TokenSetting>(Configuration.GetSection("TokenSetting"));
             #endregion
@@ -134,7 +136,6 @@ namespace ChatChallenge
 
 
             Dependency.ServiceProvider = services.BuildServiceProvider();
-
             #endregion
 
         }
@@ -169,11 +170,8 @@ namespace ChatChallenge
             {
                 routes.MapHub<ChatRoomHub>("/ChatRoomHub");
             });
-            
 
             app.UseMvc();
-
-
         }
     }
 }

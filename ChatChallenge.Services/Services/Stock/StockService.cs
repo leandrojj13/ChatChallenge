@@ -21,7 +21,6 @@ namespace ChatChallenge.Services.Services.Stock
     {
         public string ServiceUrl = "https://stooq.com/q/l/?s={{stock_code}}&f=sd2t2ohlcv&h&e=csv";
         
-        
         public async Task<StookRequestReponse> GetStockInfoByCodeAsync(string code)
         {
             var url = ServiceUrl.Replace("{{stock_code}}", code);

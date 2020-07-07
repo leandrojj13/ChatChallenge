@@ -1,38 +1,37 @@
 ﻿using ChatChallenge.Core.IoC.Config;
-using ChatChallenge.Hubs;
+using ChatChallenge.Core.Models;
 using ChatChallenge.Messages.Events;
-using ChatChallenge.Model.Entities.Chat;
-using ChatChallenge.Services.Services.Chat;
-using Microsoft.AspNetCore.SignalR;
+using Newtonsoft.Json;
 using NServiceBus;
 using NServiceBus.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
+using System.Web.Http.Controllers;
 
 namespace ChatChallenge.Handlers
 {
     public class ResponseStockInfoHandler : IHandleMessages<ResponseStockInfo>
     {
         readonly ILog log = LogManager.GetLogger<ResponseStockInfoHandler>();
-        readonly IHubContext<ChatRoomHub> _hubContext;
 
-        public ResponseStockInfoHandler(IHubContext<ChatRoomHub> hubContext)
-        {
-            _hubContext = hubContext;
-        }
+        public string ServiceUrl = "/api/ChatRoomMessage/SendStockInfo";
 
         public async Task Handle(ResponseStockInfo message, IMessageHandlerContext context)
         {
             try
             {
-                await _hubContext.Clients.Group(message.ChatRoomId)
-                  .SendAsync("StockInfo", message);
+                var appSettings = (AppSettings) Dependency.ServiceProvider.GetService(typeof(AppSettings));
+                var apiUrl = appSettings.ApiUrl + ServiceUrl;
+                var content = new StringContent(JsonConvert.SerializeObject(message), Encoding.UTF8, "application/json");
+                using (var httpClient = new HttpClient())
+                using (await httpClient.PostAsync(apiUrl, content)) { } ;
             }
             catch (Exception ex)
             {
                 log.Error(ex.Message);
+                throw ex;
             }
         }
     }

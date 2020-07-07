@@ -25,7 +25,10 @@ namespace ChatChallenge.Bus.Handlers
             try
             {
                 var result = await _stockService.GetStockInfoByCodeAsync(message.Code);
-                await context.Publish(new ResponseStockInfo() { Message = $"{result.Symbol} quote is {result.Close} per share", ChatRoomId= message.ChatRoomId });
+                if(result != null)
+                    await context.Publish(new ResponseStockInfo() { Message = $"{result.Symbol} quote is ${result.Close} per share", ChatRoomId= message.ChatRoomId });
+                else
+                    await context.Publish(new ResponseStockInfo() { Message = $"Stock info not found", ChatRoomId = message.ChatRoomId });
             }
             catch (Exception ex)
             {

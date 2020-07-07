@@ -12,6 +12,7 @@ using NServiceBus.Features;
 using NServiceBus.Persistence.Sql;
 using System;
 using System.Data.SqlClient;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace ChatChallenge.Config
 {
@@ -19,7 +20,6 @@ namespace ChatChallenge.Config
     {
         public static void AddNServiceBus(this IServiceCollection services, IConfiguration configuration)
         {
-            //SENDR ES EL API
             var nBusConfig = configuration.GetSection("NServiceBusConfig").Get<NServiceBusAppSettings>();
             var endpointConfiguration = new EndpointConfiguration(nBusConfig.SenderName);
             var transport = endpointConfiguration.UseTransport<SqlServerTransport>()
@@ -40,7 +40,6 @@ namespace ChatChallenge.Config
             dialect.Schema("dbo");
             persistence.ConnectionBuilder(
                 connectionBuilder: () => new SqlConnection(nBusConfig.ConnectionString));
-
 
             services.AddSingleton<IMessageSession>(x =>
             {

@@ -43,6 +43,7 @@ namespace ChatChallenge
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var tokenSetting = Configuration.GetSection("TokenSetting").Get<TokenSetting>();
 
             #region CORS
             var appSettings = Configuration.GetSection("AppSettings").Get<AppSettings>();
@@ -68,6 +69,7 @@ namespace ChatChallenge
             services.AddServicesRegistry();
             services.AddMainRegistry();
             services.AddSingleton(appSettings);
+            services.AddSingleton(tokenSetting);
             #endregion
 
             #region ContextConfiguration
@@ -85,8 +87,6 @@ namespace ChatChallenge
             #region Auth config
 
             services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<ChatChallengeDbContext>().AddDefaultTokenProviders();
-
-            var tokenSetting = Configuration.GetSection("TokenSetting").Get<TokenSetting>();
 
             services.AddAuthentication(x =>
             {

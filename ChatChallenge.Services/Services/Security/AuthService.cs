@@ -17,6 +17,7 @@ namespace ChatChallenge.Services.Services.Security
     public interface IAuthService
     {
         Task<AuthResponse> Login(AuthRequest loginInfo);
+        string GetToken(User user);
     }
 
     public class AuthService : IAuthService
@@ -25,11 +26,11 @@ namespace ChatChallenge.Services.Services.Security
         private readonly IMapper _mapper;
         private readonly TokenSetting _tokenSetting;
 
-        public AuthService(IMapper mapper, IUserService userService, IOptions<TokenSetting> tokenSetting)
+        public AuthService(IMapper mapper, IUserService userService, TokenSetting tokenSetting)
         {
             _userService = userService;
             _mapper = mapper;
-            _tokenSetting = tokenSetting.Value;
+            _tokenSetting = tokenSetting;
         }
 
         public async Task<AuthResponse> Login(AuthRequest loginInfo)
@@ -58,7 +59,7 @@ namespace ChatChallenge.Services.Services.Security
             }
         }
 
-        string GetToken(User user)
+        public string GetToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var aKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_tokenSetting.Secret));

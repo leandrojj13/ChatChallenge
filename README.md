@@ -10,7 +10,12 @@ First, you need is configure your Database Settings. Go to the file named appset
     "DefaultConnection": "Server=.;Database=ChatChallenge;Trusted_Connection=true;MultipleActiveResultSets=true"
   }
 ```
+
+Set ChatChallenge as your Startup project.
+
 Use the Package Console Manager to create de Database and its tables.
+
+Set ChatChallenge.Model as the console default project.
 
 ```bash
 Add-Migration init

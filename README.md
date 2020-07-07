@@ -47,3 +47,10 @@ Also, you need to configure what is the client URL that can make request to your
 1. Set as Startup Projects: ChatChallenge and ChatChallenge.Bus
 
 2. Now feel free to run the solution. 
+
+## Additional features
+
+1. .NET identity for users authentication
+
+2. Handle messages that are not understood or any exceptions raised within the bot. 
+ 

@@ -11,17 +11,24 @@ First, you need to configure your Database Settings. Go to the file named appset
   }
 ```
 
-Set ChatChallenge as your Startup project.
+**Set ChatChallenge as your Startup project.**
 
-Use the Package Console Manager to create de Database and its tables.
+For setting it, click on the project and  then click Set as Startup Project
+
+![image](https://user-images.githubusercontent.com/17713455/111626691-b3835300-87c4-11eb-8c25-21e0d5a3b71f.png)
+
+
+**Use the Package Console Manager to create the Database and its tables.**
 
 Set ChatChallenge.Model as the console default project.
 
 ```bash
 Add-Migration init
 ```
+After run the command, it would happen: 
+![image](https://user-images.githubusercontent.com/17713455/111626468-6e5f2100-87c4-11eb-8698-d1205bb9c83e.png)
 
-Run the migration.
+Now, Run the migration.
 ```bash
 Update-Database
 ```

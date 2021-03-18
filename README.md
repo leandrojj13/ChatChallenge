@@ -13,7 +13,7 @@ First, you need to configure your Database Settings. Go to the file named appset
 
 **Set ChatChallenge as your Startup project.**
 
-For setting it, click on the project and  then click Set as Startup Project
+For setting it, right click on the project and  then click Set as Startup Project
 
 ![image](https://user-images.githubusercontent.com/17713455/111626691-b3835300-87c4-11eb-8c25-21e0d5a3b71f.png)
 
@@ -54,6 +54,15 @@ Also, you need to configure what is the client URL that can make request to your
 ## Usage
 
 1. Set as Startup Projects: ChatChallenge and ChatChallenge.Bus
+
+For setting it, right click on the solution and  then click Set Startup Projects
+
+![image](https://user-images.githubusercontent.com/17713455/111631029-52aa4980-87c9-11eb-9bd6-3054d5e07c92.png)
+
+Set the projects actions to Start:
+
+![image](https://user-images.githubusercontent.com/17713455/111631383-b59be080-87c9-11eb-9c62-d27574d89e55.png)
+
 
 2. Now feel free to run the solution. 
 

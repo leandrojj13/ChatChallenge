@@ -23,10 +23,9 @@ namespace ChatChallenge.Services.Services.Chat
         {
 
         }
-
         public  List<ChatRoomMessageDto> GetByChatRoomId(int chatRoomId)
         {
-            var list = _repository.GetAll(x=> x.ChatRoomId == chatRoomId, x=> x.User).OrderBy(x=> x.CreatedDate).Take(50);
+            var list = _repository.GetAll(x=> x.ChatRoomId == chatRoomId, x=> x.User).OrderByDescending(x=> x.CreatedDate).Take(50).OrderBy(x=> x.CreatedDate);
             var listDto = _mapper.Map<List<ChatRoomMessageDto>>(list);
             return listDto;
         }

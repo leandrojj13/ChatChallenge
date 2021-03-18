@@ -20,15 +20,17 @@ For setting it, click on the project and  then click Set as Startup Project
 
 **Use the Package Console Manager to create the Database and its tables.**
 
-Set ChatChallenge.Model as the console default project.
+Set ChatChallenge.Model as the console default project and run this command:
 
 ```bash
 Add-Migration init
 ```
 After run the command, it would happen: 
+
 ![image](https://user-images.githubusercontent.com/17713455/111626468-6e5f2100-87c4-11eb-8698-d1205bb9c83e.png)
 
 Now, Run the migration.
+
 ```bash
 Update-Database
 ```
